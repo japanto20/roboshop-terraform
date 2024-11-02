@@ -29,7 +29,7 @@ resource "aws_instance" "instance" {
   #for_each = var.instances
   ami           = "data.aws_ami.ami.id"
   instance_type = var.instance_type
-  vpc_security_group_ids = ["sg-0e02eb30681e3cecb"]
+  vpc_security_group_ids = [aws_security_group.sg.id]
   tags = {
     Name = "${var.component_name}-${var.env}"
   }
