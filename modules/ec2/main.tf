@@ -35,3 +35,20 @@ resource "aws_instance" "instance" {
   }
 
 }
+
+
+  provisioner "remote-exec" {
+
+    connection {
+      type     = "ssh"
+      user     = "ec2-user"
+      password = "DevOps321"
+      host     = self.private_ip
+    }
+
+    inline = [
+      "ansible-pull -i localhost, -U https://github.com/raghudevopsb81/roboshop-ansible roboshop.yml -e env=${var.env} -e component=${var.component_name} "
+
+    ]
+  }
+}
